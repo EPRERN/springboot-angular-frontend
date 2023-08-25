@@ -3,36 +3,42 @@
   <hr>
   <form [formGroup]="personaFom" (ngSubmit)="guardar()">
 
-    <div class="form-group">
+    <div class="formb-group">
       <label><strong>Nombre</strong></label>
       <input type="text" formControlName="nombre" class="form-control">
     </div>
-
+    <br>
     <div class="form-group">
       <label><strong>Apellido</strong></label>
-      <input type="text" formControlName="apellido"  class="form-control">
+      <input type="text" formControlName="apellido" class="form-control">
     </div>
-
+    <br>
     <div class="form-group">
       <label><strong>Edad</strong></label>
-      <input type="number" formControlName="edad"  class="form-control">
+      <input type="number" formControlName="edad" class="form-control">
     </div>
 
+    <br>
     <div class="form-group">
       <label><strong>Pais</strong></label>
       <br>
+      <label>Seleccione un pais</label>
+      <!-- <select name="pais" id="pais" formControlName="pais" class="form-control" (change)="cargarProvinciasPorPaisesId($event)"> -->
       <select name="pais" id="pais" formControlName="pais" class="form-control" (change)="cargarProvinciasPorPaisesId($event)">
-        <option value="item.id" *ngFor="let item of paises">
+        <option [value]="item.id" *ngFor="let item of paises">
           {{item.nombre}}
         </option>
       </select>
+    
     </div>
 
-    
+
+    <br>
     <div class="form-group">
       <label><strong>Provincia</strong></label>
       <br>
-      <select name="provincia" id="provincia" formControlName="provincia" class="form-control" >
+      <label>Seleccione una provincia</label>
+      <select name="provincia" id="provincia" formControlName="provincia" class="form-control">
         <option value="item.id" *ngFor="let item of provincias">
           {{item.nombre}}
         </option>
@@ -41,8 +47,8 @@
 
 
     <br>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-  
+    <button type="submit" class="btn btn-primary" [disabled]="personaFom.invalid">Guardar</button>
+
   </form>
 </div>
 

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
       apellido : ['',Validators.required],
       edad : ['',Validators.required],
       pais : ['',Validators.required],
-      estado : ['',Validators.required],
+      provincia : ['',Validators.required],
     });
 
     this.paisesService.getAllPaises().subscribe(resp => {
@@ -34,6 +34,14 @@ export class AppComponent implements OnInit{
       // console.log(resp)
     },
     error=>{console.error(error)})
+  
+    this.personaFom.get('pais')?.valueChanges.subscribe(value => {
+      this.provinciasService.getAllProvinciasByPais(value.id).subscribe(resp => {
+        this.provincias = resp;
+      },
+      error => {console.error(error)});
+    })
+  
   }
 
   guardar(){}

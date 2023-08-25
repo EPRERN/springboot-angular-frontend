@@ -13,8 +13,8 @@ export class ProvinciasService {
   constructor(private httpClient: HttpClient) { }
 
 
-  public getAllProvinciasByPais(idPais:any): Observable<any>{
-    return this.httpClient.get(this.API_SERVER+idPais);
+  public getAllProvinciasByPais(idPais: string): Observable<any>{
+    return this.httpClient.get(this.API_SERVER + idPais);
   }
 
 }
