@@ -24,12 +24,12 @@
       <br>
       <label>Seleccione un pais</label>
       <!-- <select name="pais" id="pais" formControlName="pais" class="form-control" (change)="cargarProvinciasPorPaisesId($event)"> -->
-      <select name="pais" id="pais" formControlName="pais" class="form-control" (change)="cargarProvinciasPorPaisesId($event)">
-        <option [value]="item.id" *ngFor="let item of paises">
+      <select name="pais" id="pais" formControlName="pais" class="form-control">
+        <option [ngValue]="item" *ngFor="let item of paises">
           {{item.nombre}}
         </option>
       </select>
-    
+
     </div>
 
 
@@ -39,7 +39,7 @@
       <br>
       <label>Seleccione una provincia</label>
       <select name="provincia" id="provincia" formControlName="provincia" class="form-control">
-        <option value="item.id" *ngFor="let item of provincias">
+        <option [ngValue]="item" *ngFor="let item of provincias">
           {{item.nombre}}
         </option>
       </select>
@@ -50,6 +50,47 @@
     <button type="submit" class="btn btn-primary" [disabled]="personaFom.invalid">Guardar</button>
 
   </form>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
+<h2 style="text-align: center;"><strong> Registro de Datos cargados</strong></h2>
+<hr>
+<br>
+<div class="tablaRegistro">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Pais</th>
+        <th>Provincia</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of personas">
+        <td>{{item.id}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellido}}</td>
+        <td>{{item.edad}}</td>
+        <td>{{item.pais.nombre}}</td>
+        <td>{{item.provincia.nombre}}</td>
+        <td>
+          <button type="button" class="btn btn-success">Editar</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger">Borrar</button>
+        </td>
+    </tbody> 
+
+
+  </table>
 </div>
 
 
