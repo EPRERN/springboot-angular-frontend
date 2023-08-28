@@ -83,9 +83,9 @@
         <td>{{item.pais.nombre}}</td>
         <td>{{item.provincia.nombre}}</td>
         <td>
-          <button type="button" class="btn btn-success">Editar</button>
+          <button type="button" class="btn btn-success" (click)="editar(item)">Editar</button>
           &nbsp;
-          <button type="button" class="btn btn-danger">Borrar</button>
+          <button type="button" class="btn btn-danger" (click)="borrar(item)">Borrar</button>
         </td>
     </tbody> 
 

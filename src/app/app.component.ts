@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.personaFom = this.fb.group({
+      id:[''],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       edad: ['', Validators.required],
@@ -61,19 +62,50 @@ export class AppComponent implements OnInit {
     })
     this.personasService.savePersona(this.personaFom.value).subscribe(resp => {
       this.personaFom.reset();
+      this.personas = this.personas.filter((persona: { id: any; })=> resp.id!==persona.id);
       this.personas.push(resp);
     },
       error => { console.error(error) })
   }
 
 
-  borrar(){
+  borrar(persona: any) {
     Swal.fire({
-      title:'Eliminar Registro',
-      text:'¿Estás seguro de eliminar el registro?',
-      icon:'warning',
+      title: '¿ Estás seguro de eliminar el registro ?',
+      showDenyButton: true,
+      confirmButtonText: 'Cancelar',
+      denyButtonText: `Eliminar`,
+      text: '¿Estás seguro de eliminar el registro?',
+      icon: 'warning',
+    }).then((result) => {
+      if (result.isDenied) {
+        Swal.fire('Se eliminó el registro!', '', 'error'),
+          this.personasService.deletePersona(persona.id).subscribe(resp => {
+            console.log(resp)
+            if (resp === true) {
+              this.personas.pop(persona); 
+            }
+            location.reload();
+          });
+      }
+    })
+    // location.reload();
+  }
+
+  editar(persona:any){
+    
+    this.personaFom.setValue({
+      id:persona.id,
+      nombre: persona.nombre,
+      apellido: persona.apellido,
+      edad: persona.edad,
+      pais: persona.pais,
+      provincia: persona.provincia,
     })
   }
+
+
+
   // cargarProvinciasPorPaisesId(event: any) {
   //   this.provinciasService.getAllProvinciasByPais(event.target.value).subscribe(resp => {
   //     this.provincias = resp;
