@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
       showDenyButton: true,
       confirmButtonText: 'Cancelar',
       denyButtonText: `Eliminar`,
-      text: '¿Estás seguro de eliminar el registro?',
+      text: 'Esta operación es irreversible',
       icon: 'warning',
     }).then((result) => {
       if (result.isDenied) {
